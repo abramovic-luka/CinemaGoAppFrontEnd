@@ -1,9 +1,3 @@
-<!--
-https://getbootstrap.com/docs/4.3/components/forms/#overview
-https://getbootstrap.com/docs/3.3/components/
-https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_glyphs&stacked=h
--->
-
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">CinemaGO</a>
@@ -20,18 +14,10 @@ https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_glyphs&stacked=
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <router-link class="nav-link" to="/">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/about">About</router-link>
-        </li>
-      </ul>
+      <ul class="navbar-nav mr-auto"></ul>
       <form class="form-inline my-2 my-lg-0">
-        <router-link class="nav-link" to="/login">Login</router-link>
-        <router-link class="btn btn-outline-primary my-2 my-sm-0" to="/register"
-          >Register</router-link
+        <router-link class="btn btn-outline-primary my-2 my-sm-0" to="/main"
+          >Tablice</router-link
         >
       </form>
     </div>
