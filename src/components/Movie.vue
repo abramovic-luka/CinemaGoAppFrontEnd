@@ -19,6 +19,7 @@
             <div class="form-group col-md-3">
               <label>Naziv</label>
               <input
+                v-model="noviFilm.Naziv"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -27,6 +28,7 @@
             <div class="form-group col-md-3">
               <label>Strani naziv</label>
               <input
+                v-model="noviFilm.Strani_Naziv"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -35,6 +37,7 @@
             <div class="form-group col-md-3">
               <label>Redatelj</label>
               <input
+                v-model="noviFilm.Redatelji"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -45,6 +48,7 @@
             <div class="form-group col-md-3">
               <label>Glumci</label>
               <input
+                v-model="noviFilm.Glumci"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -53,6 +57,7 @@
             <div class="form-group col-md-3">
               <label>Drzava</label>
               <input
+                v-model="noviFilm.Drzava"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -61,6 +66,7 @@
             <div class="form-group col-md-3">
               <label>Audio</label>
               <input
+                v-model="noviFilm.Audio"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -69,6 +75,7 @@
             <div class="form-group col-md-3">
               <label>Titlovi</label>
               <input
+                v-model="noviFilm.Titlovi"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -79,6 +86,7 @@
             <div class="form-group col-md-3">
               <label>Trajanje</label>
               <input
+                v-model="noviFilm.Trajanje"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -87,6 +95,7 @@
             <div class="form-grou col-md-3">
               <label>Opis</label>
               <input
+                v-model="noviFilm.Opis"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -95,6 +104,7 @@
             <div class="form-group col-md-3">
               <label>Slika</label>
               <input
+                v-model="noviFilm.Slika"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -103,6 +113,7 @@
             <div class="form-group col-md-3">
               <label>Pozadina</label>
               <input
+                v-model="noviFilm.Pozadina"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -113,6 +124,7 @@
             <div class="form-group col-md-3">
               <label>Zanr</label>
               <input
+                v-model="noviFilm.Zanr"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -121,14 +133,17 @@
             <div class="form-group col-md-3">
               <label>Ocjena</label>
               <input
+                v-model="noviFilm.Ocjena"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                pattern="[0-10]+"
                 required
               />
             </div>
             <div class="form-group col-md-3">
               <label>Trailer</label>
               <input
+                v-model="noviFilm.Trailer"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -137,6 +152,7 @@
             <div class="form-group col-md-3">
               <label>Godina proizvodnje</label>
               <input
+                v-model="noviFilm.Godina_proizvodnje"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
                 required
@@ -144,7 +160,7 @@
             </div>
           </div>
           <div class="ml-auto text-right">
-            <button type="submit" class="btn btn-primary my-2">Dodaj</button>
+            <button type="button" @click="unesiFilm" class="btn btn-primary my-2">Dodaj</button>
           </div>
         </form>
       </div>
@@ -255,6 +271,85 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  
+  data(){
+    return{
+      noviFilm:{
+        Naziv:"",
+        Strani_Naziv:"",
+        Redatelji:"",
+        Glumci:"",
+        Drzava:"",
+        Audio:"",
+        Titlovi:"",
+        Trajanje:"",
+        Opis:"",
+        Slika:"",
+        Pozadina:"",
+        Zanr:"",
+        Ocjena:"",
+        Trailer:"",
+        Godina_proizvodnje:""
+      },
+      trenutniFilmovi:{
+
+      }
+    }
+  },
+  methods:{
+    unesiFilm(){
+      let alertMessage=""
+      for (const key in this.noviFilm) {
+        if (Object.hasOwnProperty.call(this.noviFilm, key)) {
+          console.log(key, this.noviFilm[key])
+          if(this.noviFilm[key]=="" || this.noviFilm[key]==null){
+            alertMessage=alertMessage+", "+key
+          }
+        }
+      }
+      if(alertMessage!=""){
+        alert("Sva polja moraju biti popunjena: "+alertMessage)
+        
+      }else{
+        const axios = require("axios")
+        let film = this.noviFilm
+        axios.post("http://localhost:3000/unos_filma",{film})
+        .then(function(response){
+          console.log(response)
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+      }
+      
+    },
+
+    dobiSveFilmove(){
+      const axios = require("axios")
+        
+        axios.get("http://localhost:3000/dohvat_filmova")
+        .then(function(response){
+          console.log(response)
+          this.trenutniFilmovi = response.data
+          console.log(this.trenutniFilmovi)
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+    },
+
+    
+    
+  },
+  /*
+  mounted(){
+    this.dobiSveFilmove()
+  }*/
+}
+</script>
 
 <style scoped>
 h3 {
