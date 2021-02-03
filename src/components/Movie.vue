@@ -165,7 +165,6 @@
         </form>
       </div>
     </div>
-
     <div class="card mt-5">
       <div class="card-header">
         Popis filmova
@@ -266,6 +265,12 @@
               </tr>
             </tbody>
           </table>
+          <ul id="example-1">
+            <li v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
+              {{ film.naziv }} {{film.ocjena}}
+            </li>
+          </ul>
+           
         </div>
       </div>
     </div>
@@ -294,9 +299,7 @@ export default {
         Trailer:"",
         Godina_proizvodnje:""
       },
-      trenutniFilmovi:{
-
-      }
+      trenutniFilmovi:[]
     }
   },
   methods:{
@@ -328,26 +331,40 @@ export default {
     },
 
     dobiSveFilmove(){
+      //let filmovi =[]
       const axios = require("axios")
-        
+      axios.get("http://localhost:3000/dohvat_filmova")
+      .then(response=>{
+        console.log(response.data)
+        this.trenutniFilmovi=response.data
+        console.log(this.trenutniFilmovi)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+      /*
         axios.get("http://localhost:3000/dohvat_filmova")
         .then(function(response){
           console.log(response)
-          this.trenutniFilmovi = response.data
+          //console.log(response.data)
+          filmovi=response.data
+          console.log(filmovi)
+          console.log(this.trenutniFilmovi)
+          this.trenutniFilmovi = filmovi
           console.log(this.trenutniFilmovi)
         })
         .catch(function(error){
           console.log(error)
         })
+        */
+      //console.log("test")
     },
-
-    
     
   },
-  /*
+  
   mounted(){
-    this.dobiSveFilmove()
-  }*/
+    this.$nextTick(this.dobiSveFilmove())
+  }
 }
 </script>
 
