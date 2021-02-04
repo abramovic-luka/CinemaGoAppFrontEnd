@@ -3,7 +3,7 @@
     <h3>Rezervacije</h3>
     <div class="card">
       <div class="card-header">
-        Dodaj novu rezervaciju
+        Popis rezervacija
       </div>
       <div class="card-body">
         <form>
@@ -163,6 +163,53 @@
     </div>
   </div>
 </template>
+
+<!--<script>
+  export default {
+  
+  data(){
+    return{
+      rezervacije:[]
+    }
+  },
+  methods:{
+    dobiSveFilmove(){
+      //let filmovi =[]
+      const axios = require("axios")
+      axios.get("http://localhost:3000/dohvat_filmova")
+      .then(response=>{
+        console.log(response.data)
+        this.trenutniFilmovi=response.data
+        console.log(this.trenutniFilmovi)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+      /*
+        axios.get("http://localhost:3000/dohvat_filmova")
+        .then(function(response){
+          console.log(response)
+          //console.log(response.data)
+          filmovi=response.data
+          console.log(filmovi)
+          console.log(this.trenutniFilmovi)
+          this.trenutniFilmovi = filmovi
+          console.log(this.trenutniFilmovi)
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+        */
+      //console.log("test")
+    },
+    
+  },
+  
+  mounted(){
+    this.$nextTick(this.dobiSveFilmove())
+  }
+}
+</script>-->
 
 <style scoped>
 h3 {
