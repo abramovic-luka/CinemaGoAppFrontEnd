@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import {login} from "@/login"
+
 export default {
   data(){
     return{
@@ -46,13 +48,24 @@ export default {
   methods:{
     checkLogin(){
       const axios = require("axios")
+      console.log(login)
         let email =this.email
         let password= this.password
         axios.post("http://localhost:3000/db/login",{email,password})
-        .then(function(response){
+        .then(response=>{
+          
+          console.log(login)
           console.log(response)
+          login.emailRes = response.data.emailRes
+          if(response.data.isAdmin ==null){
+            login.isAdmin=false
+          }else{
+            login.isAdmin = response.data.isAdmin
+          }
+          login.passwordRes = response.data.passwordRes
+          console.log(login)
         })
-        .catch(function(error){
+        .catch(error=>{
           console.log(error)
         })
     }
