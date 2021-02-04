@@ -1,6 +1,6 @@
 <template>
   <div class="Filmovi">
-    <h3>Rezervacije</h3>
+    <h3>Filmovi</h3>
     <div class="card">
       <div class="card-header">
         Dodaj novi film
@@ -8,14 +8,6 @@
       <div class="card-body">
         <form>
           <div class="form-row">
-            <div class="form-group col-md-3">
-              <label>ID</label>
-              <input
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
-            </div>
             <div class="form-group col-md-3">
               <label>Naziv</label>
               <input
@@ -43,8 +35,6 @@
                 required
               />
             </div>
-          </div>
-          <div class="form-row">
             <div class="form-group col-md-3">
               <label>Glumci</label>
               <input
@@ -54,6 +44,8 @@
                 required
               />
             </div>
+          </div>
+          <div class="form-row">
             <div class="form-group col-md-3">
               <label>Drzava</label>
               <input
@@ -81,8 +73,6 @@
                 required
               />
             </div>
-          </div>
-          <div class="form-row">
             <div class="form-group col-md-3">
               <label>Trajanje</label>
               <input
@@ -92,6 +82,8 @@
                 required
               />
             </div>
+          </div>
+          <div class="form-row">
             <div class="form-grou col-md-3">
               <label>Opis</label>
               <input
@@ -101,26 +93,6 @@
                 required
               />
             </div>
-            <div class="form-group col-md-3">
-              <label>Slika</label>
-              <input
-                v-model="noviFilm.Slika"
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
-            </div>
-            <div class="form-group col-md-3">
-              <label>Pozadina</label>
-              <input
-                v-model="noviFilm.Pozadina"
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
-            </div>
-          </div>
-          <div class="form-row">
             <div class="form-group col-md-3">
               <label>Zanr</label>
               <input
@@ -140,17 +112,8 @@
                 required
               />
             </div>
-            <div class="form-group col-md-3">
-              <label>Trailer</label>
-              <input
-                v-model="noviFilm.Trailer"
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
-            </div>
-            <div class="form-group col-md-3">
-              <label>Godina proizvodnje</label>
+              <div class="form-group col-md-3">
+              <label>Godina</label>
               <input
                 v-model="noviFilm.Godina_proizvodnje"
                 type="text"
@@ -159,25 +122,45 @@
               />
             </div>
           </div>
+          <!--<div class="form-row">
+            <div class="form-group col-md-3"></div>
+            <div class="form-group col-md-3">
+              <label>Slika</label>
+              <input
+                v-model="noviFilm.Slika"
+                type="text"
+                class="form-control ml-sm-2 mr-sm-4 my-2"
+                required
+              />
+            </div>
+            <div class="form-group col-md-3">
+              <label>Pozadina</label>
+              <input
+                v-model="noviFilm.Pozadina"
+                type="text"
+                class="form-control ml-sm-2 mr-sm-4 my-2"
+                required
+              />
+            </div>
+            <div class="form-group col-md-3"></div>
+          </div>-->
           <div class="ml-auto text-right">
             <button type="button" @click="unesiFilm" class="btn btn-primary my-2">Dodaj</button>
           </div>
         </form>
       </div>
     </div>
+
     <div class="card mt-5">
       <div class="card-header">
         Popis filmova
       </div>
       <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive-lg">
           <table class="table">
             <thead>
               <tr>
                 <th scope="col">
-                  ID
-                </th>
-                <th>
                   Naziv
                 </th>
                 <th>
@@ -205,28 +188,22 @@
                   Opis
                 </th>
                 <th>
-                  Slika
-                </th>
-                <th>
-                  Slika pozadina
-                </th>
-                <th>
                   Zanr
                 </th>
                 <th>
                   Ocjena
                 </th>
                 <th>
-                  Trailer
+                  Godina
                 </th>
                 <th>
-                  Godina
+                  CRUD  
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <template>
+              <tr v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
+                 <!--<template>
                   <td>
                     <input type="text" />
                   </td>
@@ -244,15 +221,43 @@
                       <i class="fa fa-ban"></i>
                     </span>
                   </td>
-                </template>
-                <template>
+                </template>-->
                   <td>
-                    f
+                    {{film.naziv}}
                   </td>
                   <td>
-                    f
+                    {{film.strani_naziv}}
                   </td>
-                  <td>f</td>
+                  <td>
+                    {{film.redatelj}}
+                  </td>
+                  <td>
+                    {{film.glumci}}
+                  </td>
+                  <td>
+                    {{film.drzava}}
+                  </td>
+                  <td>
+                    {{film.audio}}
+                  </td>
+                  <td>
+                    {{film.titlovi}}
+                  </td>
+                  <td>
+                    {{film.trajanje}}
+                  </td>
+                  <td>
+                    {{film.opis}}
+                  </td>
+                  <td>
+                    {{film.zanr}}
+                  </td>
+                  <td>
+                    {{film.ocjena}}
+                  </td>
+                  <td>
+                    {{film.godina_proizvodnje}}
+                  </td>
                   <td>
                     <a href="#" class="icon">
                       <i class="fa fa-trash"></i>
@@ -261,16 +266,58 @@
                       <i class="fa fa-pencil"></i>
                     </a>
                   </td>
-                </template>
               </tr>
             </tbody>
           </table>
-          <ul id="example-1">
-            <li v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
-              {{ film.naziv }} {{film.ocjena}}
-            </li>
-          </ul>
-           
+          <!--
+          <table>
+            <tr v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
+              <td>
+                    {{film.naziv}}
+                  </td>
+                  <td>
+                    {{film.strani_naziv}}
+                  </td>
+                  <td>
+                    {{film.redatelj}}
+                  </td>
+                  <td>
+                    {{film.glumci}}
+                  </td>
+                  <td>
+                    {{film.drzava}}
+                  </td>
+                  <td>
+                    {{film.audio}}
+                  </td>
+                  <td>
+                    {{film.titlovi}}
+                  </td>
+                  <td>
+                    {{film.trajanje}}
+                  </td>
+                  <td>
+                    {{film.opis}}
+                  </td>
+                  <td>
+                    {{film.zanr}}
+                  </td>
+                  <td>
+                    {{film.ocjena}}
+                  </td>
+                  <td>
+                    {{film.godina_proizvodnje}}
+                  </td>
+                  <td>
+                    <a href="#" class="icon">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                    <a href="#" class="icon">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                  </td>
+            </tr>
+          </table>-->
         </div>
       </div>
     </div>
