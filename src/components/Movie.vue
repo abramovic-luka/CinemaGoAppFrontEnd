@@ -325,6 +325,8 @@
 </template>
 
 <script>
+import {login} from "@/login"
+
 export default {
   
   data(){
@@ -406,11 +408,21 @@ export default {
         */
       //console.log("test")
     },
+
+    checkIfLoggedIn(){
+      if(login.emailRes && login.passwordRes && login.isAdmin){
+        console.log("not logged in")
+      }else{
+        this.dobiSveFilmove()
+        console.log("Logged in")
+      }
+    }
     
   },
   
   mounted(){
-    this.$nextTick(this.dobiSveFilmove())
+    this.checkIfLoggedIn()
+    
   }
 }
 </script>

@@ -164,7 +164,7 @@
   </div>
 </template>
 
-<!--<script>
+<<script>
   export default {
   
   data(){
@@ -173,40 +173,25 @@
     }
   },
   methods:{
-    dobiSveFilmove(){
+    dobiSveRezervacije(){
       //let filmovi =[]
       const axios = require("axios")
-      axios.get("http://localhost:3000/dohvat_filmova")
+      axios.get("http://localhost:3000/Rezervacije/Admin")
       .then(response=>{
         console.log(response.data)
-        this.trenutniFilmovi=response.data
-        console.log(this.trenutniFilmovi)
+        this.rezervacije=response.data
+        console.log(this.rezervacije)
       })
       .catch(error=>{
           console.log(error)
         })
-      /*
-        axios.get("http://localhost:3000/dohvat_filmova")
-        .then(function(response){
-          console.log(response)
-          //console.log(response.data)
-          filmovi=response.data
-          console.log(filmovi)
-          console.log(this.trenutniFilmovi)
-          this.trenutniFilmovi = filmovi
-          console.log(this.trenutniFilmovi)
-        })
-        .catch(function(error){
-          console.log(error)
-        })
-        */
-      //console.log("test")
+      
     },
     
   },
   
   mounted(){
-    this.$nextTick(this.dobiSveFilmove())
+    this.$nextTick(this.dobiSveRezervacije())
   }
 }
 </script>-->
