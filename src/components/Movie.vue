@@ -269,55 +269,6 @@
               </tr>
             </tbody>
           </table>
-          <!--
-          <table>
-            <tr v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
-              <td>
-                    {{film.naziv}}
-                  </td>
-                  <td>
-                    {{film.strani_naziv}}
-                  </td>
-                  <td>
-                    {{film.redatelj}}
-                  </td>
-                  <td>
-                    {{film.glumci}}
-                  </td>
-                  <td>
-                    {{film.drzava}}
-                  </td>
-                  <td>
-                    {{film.audio}}
-                  </td>
-                  <td>
-                    {{film.titlovi}}
-                  </td>
-                  <td>
-                    {{film.trajanje}}
-                  </td>
-                  <td>
-                    {{film.opis}}
-                  </td>
-                  <td>
-                    {{film.zanr}}
-                  </td>
-                  <td>
-                    {{film.ocjena}}
-                  </td>
-                  <td>
-                    {{film.godina_proizvodnje}}
-                  </td>
-                  <td>
-                    <a href="#" class="icon">
-                      <i class="fa fa-trash"></i>
-                    </a>
-                    <a href="#" class="icon">
-                      <i class="fa fa-pencil"></i>
-                    </a>
-                  </td>
-            </tr>
-          </table>-->
         </div>
       </div>
     </div>

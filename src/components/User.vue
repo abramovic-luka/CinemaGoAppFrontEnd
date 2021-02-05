@@ -1,9 +1,9 @@
 <template>
   <div class="Filmovi">
-    <h3>Rezervacije</h3>
-    <div class="card">
+    <h3>Korisnici</h3>
+    <!--<div class="card">
       <div class="card-header">
-        Dodaj novog korisnika
+        Popis korisnika
       </div>
       <div class="card-body">
         <form>
@@ -80,7 +80,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div>-->
 
     <div class="card mt-5">
       <div class="card-header">
@@ -118,8 +118,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <template>
+              <tr v-for="user in users" :key="user.name" style="color:blue;">
+                <!--<template>
                   <td>
                     <input type="text" />
                   </td>
@@ -137,8 +137,7 @@
                       <i class="fa fa-ban"></i>
                     </span>
                   </td>
-                </template>
-                <template>
+                </template>-->
                   <td>
                     f
                   </td>
@@ -154,7 +153,6 @@
                       <i class="fa fa-pencil"></i>
                     </a>
                   </td>
-                </template>
               </tr>
             </tbody>
           </table>
@@ -163,6 +161,38 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+  
+  data(){
+    return{
+      users:[]
+    }
+  },
+  methods:{
+    dobiSveUsers(){
+      //let filmovi =[]
+      const axios = require("axios")
+      axios.get("http://localhost:3000/Users")
+      .then(response=>{
+        console.log("Probava dohvatiti usere")
+        console.log(response.data)
+        this.users=response.data
+        console.log(this.users)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+      
+    }, 
+  },
+
+  mounted(){
+    this.$nextTick(this.dobiSveUsers())
+  }
+}
+</script>
 
 <style scoped>
 h3 {

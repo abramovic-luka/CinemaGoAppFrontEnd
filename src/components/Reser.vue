@@ -1,7 +1,7 @@
 <template>
   <div class="Filmovi">
     <h3>Rezervacije</h3>
-    <div class="card">
+    <!--<div class="card">
       <div class="card-header">
         Popis rezervacija
       </div>
@@ -80,14 +80,14 @@
           </div>
         </form>
       </div>
-    </div>
+    </div>-->
 
     <div class="card mt-5">
       <div class="card-header">
         Popis rezervacija
       </div>
       <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive-lg">
           <table class="table">
             <thead>
               <tr>
@@ -118,8 +118,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <template>
+              <tr v-for="rezervacija in rezervacije" :key="rezervacija.name" style="color:blue;">
+                <!--<template>
                   <td>
                     <input type="text" />
                   </td>
@@ -137,8 +137,8 @@
                       <i class="fa fa-ban"></i>
                     </span>
                   </td>
-                </template>
-                <template>
+                </template>-->
+                <!--{ime: "t", prezime: "t", naziv: "Isplata", datum_prikazivanja: "2021-02-06", vrijeme_prikazivanja: "21:30", …}-->
                   <td>
                     f
                   </td>
@@ -154,7 +154,6 @@
                       <i class="fa fa-pencil"></i>
                     </a>
                   </td>
-                </template>
               </tr>
             </tbody>
           </table>
@@ -164,7 +163,7 @@
   </div>
 </template>
 
-<<script>
+<script>
   export default {
   
   data(){
@@ -194,7 +193,7 @@
     this.$nextTick(this.dobiSveRezervacije())
   }
 }
-</script>-->
+</script>
 
 <style scoped>
 h3 {
