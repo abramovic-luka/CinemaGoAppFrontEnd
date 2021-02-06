@@ -119,6 +119,12 @@
             </thead>
             <tbody>
               <tr v-for="user in users" :key="user.name" style="color:blue;">
+                <td>
+                  {{user.ime}}
+                </td>
+                <td>
+                  {{user.email}}
+                </td>
                 <!--<template>
                   <td>
                     <input type="text" />
@@ -156,6 +162,7 @@
               </tr>
             </tbody>
           </table>
+          
         </div>
       </div>
     </div>
