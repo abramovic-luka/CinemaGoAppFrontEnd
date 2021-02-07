@@ -92,28 +92,19 @@
             <thead>
               <tr>
                 <th scope="col">
-                  ID
+                  Ime
                 </th>
                 <th>
-                  ID filma
+                  Prezime
                 </th>
                 <th>
-                  Datum unosa
+                  Naziv
                 </th>
                 <th>
                   Datum prikazivanja
                 </th>
                 <th>
                   Vrijeme prikazivanja
-                </th>
-                <th>
-                  Maksimalni broj ulaznica
-                </th>
-                <th>
-                  Trenutni broj ulaznica
-                </th>
-                <th>
-                  Dvorana
                 </th>
               </tr>
             </thead>
@@ -140,12 +131,20 @@
                 </template>-->
                 <!--{ime: "t", prezime: "t", naziv: "Isplata", datum_prikazivanja: "2021-02-06", vrijeme_prikazivanja: "21:30", …}-->
                   <td>
-                    f
+                    {{rezervacija.ime}}
                   </td>
                   <td>
-                    f
+                    {{rezervacija.prezime}}
                   </td>
-                  <td>f</td>
+                  <td>
+                    {{rezervacija.naziv}}
+                  </td>
+                  <td>
+                    {{rezervacija.datum_prikazivanja}}
+                  </td>
+                  <td>
+                    {{rezervacija.vrijeme_prikazivanja}}
+                  </td>
                   <td>
                     <a href="#" class="icon">
                       <i class="fa fa-trash"></i>
