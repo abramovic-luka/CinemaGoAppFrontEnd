@@ -10,6 +10,9 @@
       <div @click="selectedComponent = 'Reser'" class="p-2 m-2 btn btn-primary">
         Rezervacije
       </div>
+      <div @click="selectedComponent = 'Ticket'" class="p-2 m-2 btn btn-primary">
+        Karte
+      </div>
     </div>
     <div class="d-flex justify-content-center">
       <component :is="selectedComponent"></component>
@@ -21,9 +24,10 @@
 import Movie from "../components/Movie.vue";
 import User from "../components/User.vue";
 import Reser from "../components/Reser.vue";
+import Ticket from "../components/Ticket.vue";
 
 export default {
-  components: { Movie, User, Reser },
+  components: { Movie, User, Reser, Ticket },
 
   data() {
     return {
