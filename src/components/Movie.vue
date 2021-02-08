@@ -14,6 +14,7 @@
                 v-model="noviFilm.Naziv"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Pod vodom"
                 required
               />
             </div>
@@ -23,6 +24,7 @@
                 v-model="noviFilm.Strani_Naziv"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Underwater"
                 required
               />
             </div>
@@ -32,6 +34,7 @@
                 v-model="noviFilm.Redatelji"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="\_(*.*)_/"
                 required
               />
             </div>
@@ -41,6 +44,7 @@
                 v-model="noviFilm.Glumci"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Bruce lee , ...."
                 required
               />
             </div>
@@ -52,6 +56,7 @@
                 v-model="noviFilm.Drzava"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Murica"
                 required
               />
             </div>
@@ -61,6 +66,7 @@
                 v-model="noviFilm.Audio"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Engleski"
                 required
               />
             </div>
@@ -70,6 +76,7 @@
                 v-model="noviFilm.Titlovi"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Njemacki"
                 required
               />
             </div>
@@ -77,8 +84,10 @@
               <label>Trajanje</label>
               <input
                 v-model="noviFilm.Trajanje"
-                type="text"
+                type="number"
+                min="0"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="120 min"
                 required
               />
             </div>
@@ -90,6 +99,7 @@
                 v-model="noviFilm.Opis"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Kratki opis"
                 required
               />
             </div>
@@ -99,6 +109,7 @@
                 v-model="noviFilm.Zanr"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Komedija"
                 required
               />
             </div>
@@ -106,9 +117,12 @@
               <label>Ocjena</label>
               <input
                 v-model="noviFilm.Ocjena"
-                type="text"
+                type="number"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
-                pattern="[0-10]+"
+                min="0"
+                max="10"
+                step=".1"
+                placeholder="0-10,  5.5"
                 required
               />
             </div>
@@ -118,11 +132,12 @@
                 v-model="noviFilm.Godina_proizvodnje"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="2000"
                 required
               />
             </div>
           </div>
-          <!--<div class="form-row">
+          <div class="form-row">
             <div class="form-group col-md-3"></div>
             <div class="form-group col-md-3">
               <label>Slika</label>
@@ -130,6 +145,7 @@
                 v-model="noviFilm.Slika"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Link"
                 required
               />
             </div>
@@ -139,11 +155,21 @@
                 v-model="noviFilm.Pozadina"
                 type="text"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Link"
                 required
               />
             </div>
-            <div class="form-group col-md-3"></div>
-          </div>-->
+            <div class="form-group col-md-3">
+              <label>Trailer</label>
+              <input
+                v-model="noviFilm.Trailer"
+                type="text"
+                class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="Link"
+                required
+              />
+            </div>
+          </div>
           <div class="ml-auto text-right">
             <button type="button" @click="unesiFilm" class="btn btn-primary my-2">Dodaj</button>
           </div>
@@ -154,6 +180,48 @@
     <div class="card mt-5">
       <div class="card-header">
         Popis filmova
+      </div>
+      <div class="card-body">
+        <form>
+          
+          <div class="form-row justify-content-center">
+            <div class="form-group col-md-3">
+              <label>Naziv filma  </label>
+              <select v-model="pretraga.naziv"  @change="queryAgain">
+                <option ></option>
+                <option v-for="film in pretraga.filmovi" :key="film" >{{film.naziv}}</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Drzava  </label>
+
+
+              <select v-model="pretraga.drzava"  @change="queryAgain">
+                <option ></option>
+                <option v-for="drzava in pretraga.drzave" :key="drzava" >{{drzava.drzava}}</option>
+
+              </select>
+              
+            </div>
+            <div class="form-group col-md-3">
+              <label>Godina  </label>
+              <select v-model="pretraga.godina_proizvodnje"  @change="queryAgain">
+                <option ></option>
+                <option v-for="godina in pretraga.godine" :key="godina" >{{godina.godina_proizvodnje}}</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Audio  </label>
+              <select v-model="pretraga.audio"  @change="queryAgain">
+                <option ></option>
+                <option v-for="audio in pretraga.audioo" :key="audio" >{{audio.audio}}</option>
+
+              </select>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="card-body">
         <div class="table-responsive-lg">
@@ -167,12 +235,6 @@
                   Strani Naziv
                 </th>
                 <th>
-                  Redatelj
-                </th>
-                <th>
-                  Glumci
-                </th>
-                <th>
                   Drzava
                 </th>
                 <th>
@@ -184,9 +246,7 @@
                 <th>
                   Trajanje
                 </th>
-                <th>
-                  Opis
-                </th>
+                
                 <th>
                   Zanr
                 </th>
@@ -203,37 +263,14 @@
             </thead>
             <tbody>
               <tr v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
-                 <!--<template>
-                  <td>
-                    <input type="text" />
-                  </td>
-                  <td>
-                    <input type="text" />
-                  </td>
-                  <td>
-                    <input type="text" />
-                  </td>
-                  <td>
-                    <span class="icon">
-                      <i class="fa fa-check"></i>
-                    </span>
-                    <span class="icon">
-                      <i class="fa fa-ban"></i>
-                    </span>
-                  </td>
-                </template>-->
+                 
                   <td>
                     {{film.naziv}}
                   </td>
                   <td>
                     {{film.strani_naziv}}
                   </td>
-                  <td>
-                    {{film.redatelj}}
-                  </td>
-                  <td>
-                    {{film.glumci}}
-                  </td>
+                  
                   <td>
                     {{film.drzava}}
                   </td>
@@ -246,9 +283,7 @@
                   <td>
                     {{film.trajanje}}
                   </td>
-                  <td>
-                    {{film.opis}}
-                  </td>
+                  
                   <td>
                     {{film.zanr}}
                   </td>
@@ -299,12 +334,26 @@ export default {
         Trailer:"",
         Godina_proizvodnje:""
       },
-      trenutniFilmovi:[]
+      trenutniFilmovi:[],
+
+      pretraga:{
+        naziv:"",
+        drzava:"",
+        godina_proizvodnje:"",
+        audio:"",
+        filmovi:[],
+        drzave:[],
+        godine:[],
+        audioo:[]
+        
+      }
     }
   },
   methods:{
     unesiFilm(){
       let alertMessage=""
+      var d = new Date();
+      var n = d.getFullYear();
       for (const key in this.noviFilm) {
         if (Object.hasOwnProperty.call(this.noviFilm, key)) {
           console.log(key, this.noviFilm[key])
@@ -316,12 +365,19 @@ export default {
       if(alertMessage!=""){
         alert("Sva polja moraju biti popunjena: "+alertMessage)
         
-      }else{
+      }else if(this.noviFilm.Ocjena>10 || this.noviFilm.Ocjena<0){
+        alert("Ocjena mora biti između 0-10")
+      }else if(this,this.noviFilm.Godina_proizvodnje<1920 || this.noviFilm.Godina_proizvodnje>n){
+        alert("Film jos nije izaso")
+      }
+        
+       else {
         const axios = require("axios")
         let film = this.noviFilm
         axios.post("http://localhost:3000/unos_filma",{film})
         .then(function(response){
           console.log(response)
+          alert(response.data)
         })
         .catch(function(error){
           console.log(error)
@@ -342,37 +398,98 @@ export default {
       .catch(error=>{
           console.log(error)
         })
-      /*
-        axios.get("http://localhost:3000/dohvat_filmova")
-        .then(function(response){
-          console.log(response)
-          //console.log(response.data)
-          filmovi=response.data
-          console.log(filmovi)
-          console.log(this.trenutniFilmovi)
-          this.trenutniFilmovi = filmovi
-          console.log(this.trenutniFilmovi)
-        })
-        .catch(function(error){
-          console.log(error)
-        })
-        */
-      //console.log("test")
+      
     },
 
     checkIfLoggedIn(){
       if(login.emailRes && login.passwordRes && login.isAdmin){
-        console.log("not logged in")
-      }else{
         this.dobiSveFilmove()
-        console.log("Logged in")
+        this.getMovies()
+        this.getDrzave()
+        this.getGodine()
+        this.getAudio()
+        console.log("Loged in")
+      }else{
+        
+        console.log("Not loged in")
       }
-    }
+    },
+
+    getMovies(){
+      const axios = require("axios")
+      axios.get("http://localhost:3000/FilmoviNaziv")
+      .then(response=>{
+        console.log(response.data)
+        this.pretraga.filmovi=response.data
+        
+        console.log(this.pretraga.filmovi)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+    },
+    
+    getGodine(){
+      const axios = require("axios")
+      axios.get("http://localhost:3000/Godine")
+      .then(response=>{
+        console.log(response.data)
+        this.pretraga.godine=response.data
+        
+        console.log(this.pretraga.godine)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+    },
+    
+    getDrzave(){
+      const axios = require("axios")
+      axios.get("http://localhost:3000/Drzave")
+      .then(response=>{
+        console.log(response.data)
+        this.pretraga.drzave=response.data
+        
+        console.log(this.pretraga.drzave)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+    },
+
+    getAudio(){
+      const axios = require("axios")
+      axios.get("http://localhost:3000/Audio")
+      .then(response=>{
+        console.log(response.data)
+        this.pretraga.audioo=response.data
+        
+        console.log(this.pretraga.audioo)
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+    },
+    queryAgain(){
+      console.log("Query again")
+      const axios = require("axios")
+      
+      axios.post("http://localhost:3000/FiltriraniFIlmovi", this.pretraga)
+      .then(response=>{
+        console.log(response.data)
+        
+        
+        this.trenutniFilmovi = response.data
+      })
+      .catch(error=>{
+          console.log(error)
+        })
+    },
     
   },
   
   mounted(){
-    this.checkIfLoggedIn()
+    this.$nextTick(this.checkIfLoggedIn())
     
   }
 }
