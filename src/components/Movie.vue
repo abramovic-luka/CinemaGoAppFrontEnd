@@ -367,14 +367,14 @@ export default {
         
       }else if(this.noviFilm.Ocjena>10 || this.noviFilm.Ocjena<0){
         alert("Ocjena mora biti između 0-10")
-      }else if(this,this.noviFilm.Godina_proizvodnje<1920 || this.noviFilm.Godina_proizvodnje>n){
+      }else if(this.noviFilm.Godina_proizvodnje<1920 || this.noviFilm.Godina_proizvodnje>n){
         alert("Film jos nije izaso")
       }
         
        else {
         const axios = require("axios")
-        let film = this.noviFilm
-        axios.post("http://localhost:3000/unos_filma",{film})
+        var film = this.noviFilm
+        axios.post("https://cinema-app2.herokuapp.com/unos_filma",film)
         .then(function(response){
           console.log(response)
           alert(response.data)
@@ -389,7 +389,7 @@ export default {
     dobiSveFilmove(){
       //let filmovi =[]
       const axios = require("axios")
-      axios.get("http://localhost:3000/dohvat_filmova")
+      axios.get("https://cinema-app2.herokuapp.com/dohvat_filmova")
       .then(response=>{
         console.log(response.data)
         this.trenutniFilmovi=response.data
@@ -417,7 +417,7 @@ export default {
 
     getMovies(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/FilmoviNaziv")
+      axios.get("https://cinema-app2.herokuapp.com/FilmoviNaziv")
       .then(response=>{
         console.log(response.data)
         this.pretraga.filmovi=response.data
@@ -431,7 +431,7 @@ export default {
     
     getGodine(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/Godine")
+      axios.get("https://cinema-app2.herokuapp.com/Godine")
       .then(response=>{
         console.log(response.data)
         this.pretraga.godine=response.data
@@ -445,7 +445,7 @@ export default {
     
     getDrzave(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/Drzave")
+      axios.get("https://cinema-app2.herokuapp.com/Drzave")
       .then(response=>{
         console.log(response.data)
         this.pretraga.drzave=response.data
@@ -459,7 +459,7 @@ export default {
 
     getAudio(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/Audio")
+      axios.get("https://cinema-app2.herokuapp.com/Audio")
       .then(response=>{
         console.log(response.data)
         this.pretraga.audioo=response.data
@@ -474,7 +474,7 @@ export default {
       console.log("Query again")
       const axios = require("axios")
       
-      axios.post("http://localhost:3000/FiltriraniFIlmovi", this.pretraga)
+      axios.post("https://cinema-app2.herokuapp.com/FiltriraniFIlmovi", this.pretraga)
       .then(response=>{
         console.log(response.data)
         

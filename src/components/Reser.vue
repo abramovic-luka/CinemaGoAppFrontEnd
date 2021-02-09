@@ -140,7 +140,7 @@ import {login} from "@/login"
     dobiSveRezervacije(){
       //let filmovi =[]
       const axios = require("axios")
-      axios.get("http://localhost:3000/Rezervacije/Admin")
+      axios.get("https://cinema-app2.herokuapp.com/Rezervacije/Admin")
       .then(response=>{
         console.log(response.data)
         this.rezervacije=response.data
@@ -155,7 +155,7 @@ import {login} from "@/login"
       console.log("Query again")
       const axios = require("axios")
       
-      axios.post("http://localhost:3000/FiltriraneRezervacije", {odabrani_datum:this.odabrani_datum,odabrano_vrijeme:this.odabrano_vrijeme, id_film:this.id_film})
+      axios.post("https://cinema-app2.herokuapp.com/FiltriraneRezervacije", {odabrani_datum:this.odabrani_datum,odabrano_vrijeme:this.odabrano_vrijeme, id_film:this.id_film})
       .then(response=>{
         console.log(response.data)
         
@@ -168,7 +168,7 @@ import {login} from "@/login"
     },
     getDates(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/Dates")
+      axios.get("https://cinema-app2.herokuapp.com/Dates")
       .then(response=>{
         console.log(response.data)
         this.datumi=response.data
@@ -181,7 +181,7 @@ import {login} from "@/login"
     },
     getTimes(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/VrijemeGledanja")
+      axios.get("https://cinema-app2.herokuapp.com/VrijemeGledanja")
       .then(response=>{
         console.log(response.data)
         this.vrijeme=response.data
@@ -194,7 +194,7 @@ import {login} from "@/login"
     },
     getMovies(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/FilmoviNaziv")
+      axios.get("https://cinema-app2.herokuapp.com/FilmoviNaziv")
       .then(response=>{
         console.log(response.data)
         this.filmovi=response.data

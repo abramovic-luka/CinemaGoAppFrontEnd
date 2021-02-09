@@ -152,7 +152,7 @@ export default {
 
     getMovies(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/FilmoviNaziv")
+      axios.get("https://cinema-app2.herokuapp.com/FilmoviNaziv")
       .then(response=>{
         console.log(response.data)
         this.filmovi=response.data
@@ -198,7 +198,7 @@ export default {
 
       const axios = require("axios")
       
-      axios.post("http://localhost:3000/NoviFilmRaspored", 
+      axios.post("https://cinema-app2.herokuapp.com/NoviFilmRaspored", 
                 {film:this.film,
                 datum_prikazivanja:this.datum_prikazivanja,
                 vrijeme_prikazivanja:this.vrijeme_prikazivanja,
@@ -214,7 +214,7 @@ export default {
 
     sviRasporedi(){
       const axios = require("axios")
-      axios.get("http://localhost:3000/SviRasporedi")
+      axios.get("https://cinema-app2.herokuapp.com/SviRasporedi")
       .then(response=>{
         this.rasporedi = response.data
         console.log(this.rasporedi)

@@ -51,7 +51,7 @@ export default {
       console.log(login)
         let email =this.email
         let password= this.password
-        axios.post("http://localhost:3000/db/login",{email,password})
+        axios.post("https://cinema-app2.herokuapp.com/db/login",{email,password})
         .then(response=>{
           
           console.log(login)

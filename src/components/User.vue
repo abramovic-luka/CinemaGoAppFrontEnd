@@ -61,7 +61,7 @@
     dobiSveUsers(){
       //let filmovi =[]
       const axios = require("axios")
-      axios.get("http://localhost:3000/Users")
+      axios.get("https://cinema-app2.herokuapp.com/Users")
       .then(response=>{
         console.log("Probava dohvatiti usere")
         console.log(response.data)
