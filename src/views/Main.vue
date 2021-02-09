@@ -11,7 +11,7 @@
         Rezervacije
       </div>
       <div @click="selectedComponent = 'Ticket'" class="p-2 m-2 btn btn-primary">
-        Karte
+        Raspored filmova
       </div>
     </div>
     <div class="d-flex justify-content-center">

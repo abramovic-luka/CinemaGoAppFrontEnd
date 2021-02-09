@@ -221,6 +221,7 @@ import {login} from "@/login"
         this.l=login.passwordRes
         this.a=login.passwordRes
         this.e=login.passwordRes
+        alert("Not loged in")
         console.log(this.logg)
         console.log("Not logged in")
       }

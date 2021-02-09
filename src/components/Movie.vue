@@ -256,9 +256,7 @@
                 <th>
                   Godina
                 </th>
-                <th>
-                  CRUD  
-                </th>
+                
               </tr>
             </thead>
             <tbody>
@@ -294,12 +292,6 @@
                     {{film.godina_proizvodnje}}
                   </td>
                   <td>
-                    <a href="#" class="icon">
-                      <i class="fa fa-trash"></i>
-                    </a>
-                    <a href="#" class="icon">
-                      <i class="fa fa-pencil"></i>
-                    </a>
                   </td>
               </tr>
             </tbody>
@@ -410,7 +402,7 @@ export default {
         this.getAudio()
         console.log("Loged in")
       }else{
-        
+        alert("Not loged in")
         console.log("Not loged in")
       }
     },

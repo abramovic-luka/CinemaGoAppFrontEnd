@@ -63,6 +63,12 @@ export default {
             login.isAdmin = response.data.isAdmin
           }
           login.passwordRes = response.data.passwordRes
+
+          if(response.data.emailRes && response.data.isAdmin && response.data.passwordRes){
+            alert("Uspjesan login")
+          }else{
+            alert("Krivi login")
+          }
           console.log(login)
         })
         .catch(error=>{

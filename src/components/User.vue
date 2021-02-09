@@ -7,7 +7,7 @@
       <div class="card-header">
         Popis korisnika
       </div>
-      <div class="card-body">
+      <div class="card-body" v-if="loggin">
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -50,11 +50,13 @@
 </template>
 
 <script>
+import {login} from "@/login"
   export default {
   
   data(){
     return{
-      users:[]
+      users:[],
+      loggin:false
     }
   },
   methods:{
@@ -73,10 +75,21 @@
         })
       
     }, 
+    checkIfLoggedIn(){
+      if(login.emailRes && login.passwordRes && login.isAdmin){
+        this.dobiSveUsers()
+        this.loggin=true
+        console.log("Loged in")
+      }else{
+        this.loggin=false
+        alert("Not loged in")
+        console.log("Not loged in")
+      }
+    }
   },
 
   mounted(){
-    this.$nextTick(this.dobiSveUsers())
+    this.$nextTick(this.checkIfLoggedIn())
   }
 }
 </script>
