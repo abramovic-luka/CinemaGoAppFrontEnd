@@ -6,41 +6,37 @@
         Dodaj novi datum i film
       </div>
       <div class="card-body">
-        <form>
+        <form v-if="logedIn">
           <div class="form-row">
             <div class="form-group col-md-3">
-              <label>Naziv</label>
-              <input
-                v-model="noviFilm.Naziv"
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
+              <label>Film</label>
+              <br>
+              <select v-model="film" >
+                <option ></option>
+                <option v-for="film in filmovi" :key="film" >{{film.naziv}}</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-3" >
+              <label>Datum prikazivanja</label>
+              <input class="form-control" type="date" v-model="datum_prikazivanja"  >
+              
             </div>
             <div class="form-group col-md-3">
-              <label>Strani naziv</label>
-              <input
-                v-model="noviFilm.Strani_Naziv"
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
+              <label>Vrijeme prikazivanja</label>
+              <input class="form-control" type="time" format="HH:mm" v-model="vrijeme_prikazivanja"  >
+
             </div>
             <div class="form-group col-md-3">
-              <label>Redatelj</label>
+              <label>Max ulaznica</label>
               <input
-                v-model="noviFilm.Redatelji"
-                type="text"
+                v-model="max_ulaznica"
+                type="number"
+                min="10"
+                max="100"
+                step="1"
                 class="form-control ml-sm-2 mr-sm-4 my-2"
-                required
-              />
-            </div>
-            <div class="form-group col-md-3">
-              <label>Glumci</label>
-              <input
-                v-model="noviFilm.Glumci"
-                type="text"
-                class="form-control ml-sm-2 mr-sm-4 my-2"
+                placeholder="10-100"
                 required
               />
             </div>
@@ -48,8 +44,8 @@
           
           
           
-          <div class="ml-auto text-right">
-            <button type="button" @click="unesiFilm" class="btn btn-primary my-2">Dodaj</button>
+          <div class="ml-auto text-center">
+            <button type="button" @click="dodajNoviRaspored"  class="btn btn-primary my-2">Dodaj</button>
           </div>
         </form>
       </div>
@@ -65,16 +61,39 @@
             <thead>
               <tr>
                 <th scope="col">
-                  Naziv
+                  Film
                 </th>
-                
+                <th >
+                  Datum prikazivanja
+                </th>
+                <th >
+                  Vrijeme prikazivanja
+                </th>
+                <th >
+                  Trenutno ulaznica
+                </th>
+                <th >
+                  Max ulaznica
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="film in trenutniFilmovi" :key="film.name" style="color:blue;">
+              <tr v-for="raspored in rasporedi" :key="raspored" style="color:blue;">
                  
                   <td>
-                    {{film.naziv}}
+                    {{raspored.naziv}}
+                  </td>
+                  <td>
+                    {{raspored.datum_prikazivanja}}
+                  </td>
+                  <td>
+                    {{raspored.vrijeme_prikazivanja}}
+                  </td>
+                  <td>
+                    {{raspored.trenutno_ulaznica}}
+                  </td>
+                  <td>
+                    {{raspored.max_ulaznica}}
                   </td>
                   
                   <td>
@@ -98,28 +117,35 @@
 import {login} from "@/login"
 
 export default {
-  
+  name:"test",
+
   data(){
     return{
-      film:[],
+      filmovi:[],
+      film:"",
       datum_prikazivanja:"",
       vrijeme_prikazivanja:"",
-      max_ulaznica:""
+      max_ulaznica:"",
+
+      logedIn:false,
+
+      rasporedi:[]
+      
     }
   },
+  
   methods:{
     
 
     checkIfLoggedIn(){
+      
       if(login.emailRes && login.passwordRes && login.isAdmin){
-        this.dobiSveFilmove()
+        this.sviRasporedi()
         this.getMovies()
-        this.getDrzave()
-        this.getGodine()
-        this.getAudio()
+        this.logedIn=true
         console.log("Loged in")
       }else{
-        
+        this.logedIn=false
         console.log("Not loged in")
       }
     },
@@ -129,31 +155,74 @@ export default {
       axios.get("http://localhost:3000/FilmoviNaziv")
       .then(response=>{
         console.log(response.data)
-        this.pretraga.filmovi=response.data
+        this.filmovi=response.data
         
-        console.log(this.pretraga.filmovi)
+        console.log(this.filmovi)
       })
       .catch(error=>{
           console.log(error)
         })
     },
     
-    
-    queryAgain(){
-      console.log("Query again")
+
+    dodajNoviRaspored(){
+      let alertMessage="Ne moze biti prazno:"
+      var d = new Date();
+      var dd = String(d.getDate()).padStart(2, '0');
+      var mm = String(d.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = d.getFullYear();
+
+      var today = yyyy + "-"+ mm+ "-" + dd ;
+      console.log(today)
+      console.log(this.datum_prikazivanja)
+      if(this.datum_prikazivanja==""){
+        alertMessage+=" Datum,"
+      }
+      if(this.film ==""){
+        alertMessage+=" Film,"
+      }
+      if(this.vrijeme_prikazivanja ==""){
+        alertMessage+=" Vrijeme Prikazivanja,"
+      }
+      if(this.max_ulaznica ==""){
+        alertMessage+=" maxUlaznica,"
+      }
+      if(alertMessage!="Ne moze biti prazno:"){
+        alert("Sva polja moraju biti popunjena: "+alertMessage)
+      
+      }else if(this.max_ulaznica>90 || this.max_ulaznica<10){
+        alert("Ne moze biti vise od 90 ili manje od 10 slobodnih sjedala")
+      }else if(this.datum_prikazivanja<today){
+        alert("Datum prikazivanja ne moze biti prije danas")
+      }
+
       const axios = require("axios")
       
-      axios.post("http://localhost:3000/FiltriraniFIlmovi", this.pretraga)
+      axios.post("http://localhost:3000/NoviFilmRaspored", 
+                {film:this.film,
+                datum_prikazivanja:this.datum_prikazivanja,
+                vrijeme_prikazivanja:this.vrijeme_prikazivanja,
+                max_ulaznica:this.max_ulaznica})
       .then(response=>{
-        console.log(response.data)
-        
-        
-        this.trenutniFilmovi = response.data
+        this.sviRasporedi()
+        alert(response.data)
       })
       .catch(error=>{
-          console.log(error)
-        })
+        console.log(error)
+      })
     },
+
+    sviRasporedi(){
+      const axios = require("axios")
+      axios.get("http://localhost:3000/SviRasporedi")
+      .then(response=>{
+        this.rasporedi = response.data
+        console.log(this.rasporedi)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    }
     
   },
   
